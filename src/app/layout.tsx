@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Providers } from "./providers"
 import { Box, Container } from "@chakra-ui/react"
-import Image from "next/image"
+import Header from "./_components/Header"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,11 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={inter.className}>
         <Providers>
           <Box bg="#EDF0F7">
-            <Box as="header" bg="#FFFFFF">
-              <Container maxW="1200px" mx="auto" p={4}>
-                <Image src="/images/logo.svg" width={258} height={84} alt="Family Triage logo" />
-              </Container>
-            </Box>
+            <Header />
 
             <Container maxW="1200px" mx="auto" p={4} mt={4}>
               <Box as="main" bg="#FFFFFF" p="32px">
