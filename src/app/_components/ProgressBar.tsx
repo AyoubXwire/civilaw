@@ -8,19 +8,20 @@ export default function ProgressBar() {
   const {
     progress: {
       steps,
-      activeStep,
-    }
+      visibleStep,
+      setVisibleStep,
+    },
   } = useInterview()
 
   return (
-    <Stepper index={activeStep}>
+    <Stepper index={visibleStep}>
       {steps.map((stepName, index) => (
         <Step key={index}>
-          <StepIndicator _active={{ bg: "#008992" }}>
+          <StepIndicator onClick={() => setVisibleStep(index)} cursor="pointer">
             <StepStatus
-              complete={<StepIcon />}
-              incomplete={<StepNumber />}
-              active={<StepNumber />}
+              complete={<Box borderRadius="full" border={"2px solid blue.500"} w="100%" h="100%"></Box>}
+              incomplete={<Box borderRadius="full" border={"2px solid blue.500"} w="100%" h="100%"></Box>}
+              active={<Box bg="blue.500" borderRadius="full" w="100%" h="100%"></Box>}
             />
           </StepIndicator>
 

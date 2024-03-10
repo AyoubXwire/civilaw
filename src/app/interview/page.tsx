@@ -8,14 +8,14 @@ import Image from "next/image"
 
 export default function Interview() {
   
-  const { data } = useInterview()
+  const { data, progress } = useInterview()
 
   return (
     <Box>
-      <Accordion>
+      <Accordion defaultIndex={[0]} index={progress.visibleStep}>
         <AccordionItem>
             <AccordionButton>
-              <Heading as="h2" fontSize="32px" flex="1" textAlign="left">Eligibility</Heading>
+              <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Eligibility</Heading>
               <AccordionIcon />
             </AccordionButton>
           <AccordionPanel pb={4}>
@@ -33,7 +33,7 @@ export default function Interview() {
 
         <AccordionItem>
             <AccordionButton>
-              <Heading as="h2" fontSize="32px" flex="1" textAlign="left">Finances</Heading>
+              <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Finances</Heading>
               <AccordionIcon />
             </AccordionButton>
           <AccordionPanel pb={4}>
@@ -77,6 +77,46 @@ export default function Interview() {
                 </Box>
               }
             />
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton>
+            <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Assets</Heading>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <p>More questions..</p>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton>
+            <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Children</Heading>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <p>More questions..</p>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton>
+            <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Harm</Heading>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <p>More questions..</p>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton>
+            <Heading as="h2" fontSize="26px" flex="1" textAlign="left">Proceed</Heading>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <p>More questions..</p>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

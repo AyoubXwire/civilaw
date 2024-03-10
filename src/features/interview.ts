@@ -4,11 +4,12 @@ type Interview = {
   progress: {
     steps: string[] // the steps that can be filled
     currentStep: number // the step that should logically be pending to be filled
-    activeStep: number // the step that is currently active and displayed
-    gotoNext: () => void
-    gotoPrevious: () => void
-    gotoStep: (step: number) => void
-    getStepName: (step: number) => string
+    visibleStep: number // the step that is currently active and visible
+
+    advanceCurrentStep: () => void // advance the current step to the next, the current step should only move forward
+    gotoNextVisibleStep: () => void
+    gotoPreviousVisibleStep: () => void
+    setVisibleStep: (step: number) => void
   }
   data: {
     livedInNevadaForAtLeast6Weeks?: boolean
@@ -31,11 +32,15 @@ const useInterview = create<Interview>()((set, get) => ({
   progress: {
     steps: ["Eligibility", "Finances", "Assets", "Children", "Harm", "Proceed"],
     currentStep: 0,
-    activeStep: 0,
-    gotoNext: () => set((state) => ({ progress: { ...state.progress, currentStep: state.progress.currentStep + 1 } })),
-    gotoPrevious: () => set((state) => ({ progress: { ...state.progress, currentStep: state.progress.currentStep - 1 } })),
-    gotoStep: (step) => set((state) => ({ progress: { ...state.progress, currentStep: step } })),
-    getStepName: (step) => get().progress.steps[step],
+    visibleStep: 0,
+
+    advanceCurrentStep: () => set((state) => ({ progress: { ...state.progress, currentStep: state.progress.currentStep + 1, visibleStep: state.progress.currentStep + 1 } })),
+    gotoNextVisibleStep: () => set((state) => ({ progress: { ...state.progress, visibleStep: state.progress.currentStep + 1 } })),
+    gotoPreviousVisibleStep: () => set((state) => ({ progress: { ...state.progress, visibleStep: state.progress.currentStep - 1 } })),
+    setVisibleStep: (step) => set((state) => {
+      if (step > state.progress.currentStep) return state
+      return { ...state, progress: { ...state.progress, visibleStep: step } }
+    }),
   },
   data: {
     livedInNevadaForAtLeast6Weeks: undefined,
